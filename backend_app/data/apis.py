@@ -16,7 +16,7 @@ from .utils import (
     # _run_datasync
 )
 from .tasks import run_datasync_task, run_datasync_model_task, run_datasync_models_task
-from .models import DataSync
+from .models import DataSync, DataSource
 
 from io import BytesIO
 from zipfile import ZipFile
@@ -471,3 +471,20 @@ def run_datasync_models_async(self):
             retry=False
         )
     return JsonResponse({"status": "enqueued"}, safe=False)
+
+
+@api_view(['POST'])
+@permission_classes([IsAdminUser])
+def modify_data_source(self):
+    data = self.data.copy()
+    data_source = DataSource.objects.get(name=data['name'])
+    data_source.is_enabled = data['isEnabled']
+    data_source.save()
+    return JsonResponse(data_source.to_dict(), safe=False)
+
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def get_data_sources(self):
+    data_sources = DataSource.objects.all()
+    return JsonResponse([d.to_dict() for d in data_sources], safe=False)

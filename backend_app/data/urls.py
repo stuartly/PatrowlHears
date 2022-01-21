@@ -13,4 +13,6 @@ urlpatterns = [
     path('export/full', apis.export_data_full, name='export_data_full'),
     path('export/vulns/latest', apis.export_latest_vulns, name='export_latest_vulns'),
     path('import/vulns', apis.import_vulns, name='import_vulns'),
+    path('source/modify', apis.modify_data_source, name='modify_data_source'),
+    path('source/info', apis.get_data_sources, name='get_data_sources'),
 ]

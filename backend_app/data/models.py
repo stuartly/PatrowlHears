@@ -128,3 +128,18 @@ class DataSync(models.Model):
             self.created_at = timezone.now()
         self.updated_at = timezone.now()
         return super(DataSync, self).save(*args, **kwargs)
+
+
+class DataSource(models.Model):
+    name = models.CharField(max_length=50)
+    is_enabled = models.BooleanField(default=False)
+    description = models.TextField(default="")
+    update_at = models.DateTimeField(default=timezone.now, null=True)
+
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'description': self.description,
+            'isEnabled': self.is_enabled,
+            'updateAt': self.update_at
+        }
