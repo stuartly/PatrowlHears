@@ -1132,3 +1132,10 @@ def email_monthly_report(self):
 def slack_alert_vuln(self, vuln_id):
     slack_alert_vuln_task.apply_async(args=[vuln_id, "update"], queue='alerts', retry=False)
     return JsonResponse("enqueued", safe=False)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def cnvd_count(self):
+    cnvd_vulns_count = Vuln.objects.filter(cveid__startswith='CNVD-').count()
+    return JsonResponse({"cnvd_vulns_count": cnvd_vulns_count}, safe=False)

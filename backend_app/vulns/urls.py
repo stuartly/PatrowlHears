@@ -36,4 +36,6 @@ urlpatterns = [
     path('admin/email-report/weekly', apis.email_weekly_report, name='email_weekly_report'),
     path('admin/email-report/monthly', apis.email_monthly_report, name='email_monthly_report'),
     path('admin/slack-alert/<vuln_id>', apis.slack_alert_vuln, name='slack_alert_vuln'),
+
+    path('cnvd-count', apis.cnvd_count, name='cnvd-count'),
 ]
