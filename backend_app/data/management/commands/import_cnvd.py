@@ -95,3 +95,24 @@ def save_vuln(vulnerability):
     }
 
     import_cve(data)
+
+
+def download_cnvd_data():
+    """
+    Download the cnvd data from the cnvd website
+    """
+    import requests
+
+    user_agent = {
+        'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36',
+        'Cookie': "__jsluid_s=32988571238275e20e6f4effd4e148fd; __jsl_clearance_s=1649676858.633|0|CVbgdOwe7QH5O%2FCnA2shtPpkIUU%3D; JSESSIONID=68B2F5DBF96711FA4B3D8CEDAECA310C; puk=5478ebd67ede671d674f85b82632b6f4af45cca5e75a93ba0e985e2dc66fe1ff1942d475e9417a37c0d19f26977b0df48f22a3853bbcef22dda23858b585be8c42e13ceaf8e690ce419a93e101c2cb32e03fadf66ae939616b76a7a390318c44bd8fa2d2781a77b1e27a6e825482801e07319ac7a702bdab209b3a4f0fb9d42e"
+        }
+
+    for i in range(1, 1200):
+        print(i)
+        res = requests.get('https://www.cnvd.org.cn/shareData/download/' + str(i), headers=user_agent)
+        if res.status_code == 200:
+            print("download")
+            file_name = res.headers['Content-Disposition'].split('=')[1]
+            with open('cnvd_data/' + file_name, 'w', encoding='utf-8') as f:
+                f.write(res.text)
