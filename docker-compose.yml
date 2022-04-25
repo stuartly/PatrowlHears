@@ -8,6 +8,8 @@ services:
       - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbit log_levels [{connection,error}]
     expose:
       - '5672'
+    ports:
+      - "5672:5672"
 
   db:
     image: postgres:11-alpine
@@ -19,10 +21,12 @@ services:
       - POSTGRES_PASSWORD=patrowlhears_pw
     expose:
       - '5432'
+    ports:
+      - "5432:5432"
     volumes:
       - ./backend_app/var/db/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
       - ./backend_app/var/db:/mnt
-    #   - ./pg_data:/var/lib/postgresql/data/
+      - ./pg_data:/var/lib/postgresql/data/
 
   patrowlhears:
     container_name: patrowlhears-django
@@ -45,6 +49,8 @@ services:
       - rabbitmq
     expose:
       - "8303"
+    ports:
+      - "8303:8303"
     volumes:
       - ./backend_app/staticfiles:/opt/patrowl-hears/backend_app/staticfiles
       - ./docker-entrypoint.sh:/opt/patrowl-hears/docker-entrypoint.sh
