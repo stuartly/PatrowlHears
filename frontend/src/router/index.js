@@ -36,6 +36,7 @@ import FirstSteps from '@/components/pages/FirstSteps.vue'
 import UserEdit from '@/components/pages/UserEdit.vue'
 import Help from '@/components/pages/Help.vue'
 import NotFound from '@/components/general/NotFound.vue'
+import Connectors from "@/components/pages/Connectors";
 
 Vue.use(VueRouter)
 
@@ -75,6 +76,7 @@ const routes = [
       // { path: '/kb/vendors/:vendor_name', name: 'KBProductVersions', component: KBProductVersions },
       { path: '/kb/cves', name: 'KBCVE', component: KBCVE },
       { path: '/kb/bulletins', name: 'KBBulletins', component: KBBulletins },
+      { path: '/connectors', name: 'Connectors', component: Connectors },
       { path: '/vulns', name: 'Vulns', component: Vulns },
       { path: '/vulns/:vuln_id', name: 'Vuln', component: Vuln },
       { path: '/exploits', name: 'Exploits', component: Exploits },

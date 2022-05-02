@@ -126,6 +126,7 @@ export default {
 
       { icon: 'mdi-file-multiple', text: 'Monitoring', to: '/monitoring' },
       { icon: 'mdi-file-find', text: 'Vulnerabilities', to: '/vulns' },
+      { icon: 'mdi-connection', text: 'Connectors', to: '/connectors' },
       { icon: 'mdi-knife-military', text: 'Exploits', to: '/exploits' },
       { icon: 'mdi-security', text: 'Ratings', to: '/ratings' },
       { icon: 'mdi-bookmark', text: 'Public feeds', to: '', submenu: [
