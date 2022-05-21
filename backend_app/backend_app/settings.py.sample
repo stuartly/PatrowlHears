@@ -382,6 +382,10 @@ if HEARS_DATASYNC_MODE == 'master':
             'task': 'vulns.tasks.email_monthly_report_task',
             'schedule': crontab(0, 0, day_of_month='1')
         },
+        'update_cve_daily': {
+            'task': 'data.tasks.download_import_recent_cve_task',
+            'schedule': crontab(minute=0, hour=0)
+        },
     }
 else:
     CELERY_BEAT_SCHEDULE = {
