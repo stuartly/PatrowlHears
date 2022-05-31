@@ -184,7 +184,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('POSTGRES_DBNAME', 'patrowlhears_db'),
         'USER': os.environ.get('POSTGRES_USER', 'patrowlhears'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'patrowlhears_pw'),
         'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
         'PORT': os.environ.get('POSTGRES_PORT', ''),
     },
@@ -381,10 +381,6 @@ if HEARS_DATASYNC_MODE == 'master':
         'alert_monitored_products_monthly': {
             'task': 'vulns.tasks.email_monthly_report_task',
             'schedule': crontab(0, 0, day_of_month='1')
-        },
-        'update_cve_daily': {
-            'task': 'data.tasks.download_import_recent_cve_task',
-            'schedule': crontab(minute=0, hour=0)
         },
     }
 else:

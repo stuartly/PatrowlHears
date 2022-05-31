@@ -95,12 +95,7 @@ def download_import_recent_cve():
         Download the latest CVEs from the NVD and import them into the database.
         :return:
     """
-
-    # check if source are enabled
-    data_source = DataSource.objects.get(name="CVE")
-    if not data_source.is_enabled:
-        return
-
+    print("Updating CVE data source")
         # Creating download directory
     download_dir = os.path.dirname(os.path.realpath(__file__)) + "/download/"
     if not os.path.exists(download_dir):
@@ -127,13 +122,6 @@ def download_import_recent_cve():
     jsonfile.close()
 
     # Import cve
-    files_sig = []
+
     for cve_entry in tqdm(cve_dict['CVE_Items']):
-        files_sig.append(import_cve_task.s(cve_entry).set(queue='data'))
-    pbar = tqdm(total=len(files_sig), desc="CVES-run")
-    chunk_size = 32
-    for chunk in chunks(files_sig, chunk_size):
-        res = group(chunk)()
-        res.get()
-        pbar.update(chunk_size)
-    pbar.close()
+        import_cve(cve_entry)
