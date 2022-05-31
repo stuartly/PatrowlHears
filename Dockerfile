@@ -22,7 +22,6 @@ RUN apt-get update -yq \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY . /opt/patrowl-hears/
-COPY backend_app/backend_app/settings.py.sample /opt/patrowl-hears/backend_app/backend_app/settings.py
 
 WORKDIR /opt/patrowl-hears/backend_app
 RUN rm -rf env \
