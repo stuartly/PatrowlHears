@@ -63,7 +63,7 @@ class VulnSet(viewsets.ModelViewSet):
                     output_field=BooleanField()
                 ),
                 org=Value(org_id, output_field=CharField())
-            ).order_by('-updated_at').distinct()
+            ).order_by('-updated_at')
 
         # if self.request.method == 'GET' and 'fields' in self.request.GET:
         #     for f in self.request.GET.get('fields').split(','):
