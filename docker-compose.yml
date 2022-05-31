@@ -31,7 +31,6 @@ services:
   patrowlhears:
     container_name: patrowlhears-django
     build: .
-    image: patrowl/patrowl-hears-community-edition:${PATROWL_HEARS_VERSION}
     environment:
       - DEBUG=False
       - POSTGRES_HOST=db

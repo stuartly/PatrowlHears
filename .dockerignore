@@ -1,5 +1,4 @@
 .DS_Store
-backend_app/backend_app/settings.py
 backend_app/backend_app/settings_replica.py
 backend_app/var/log/*.log
 backend_app/var/log/*.log.[0-9]*

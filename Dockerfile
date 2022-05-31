@@ -1,5 +1,5 @@
 FROM python:3.7-slim
-MAINTAINER Patrowl.io "getsupport@patrowl.io"
+
 LABEL Name="PatrowlHears" Version="1.1.0"
 
 ENV PYTHONUNBUFFERED 1
@@ -21,7 +21,8 @@ RUN apt-get update -yq \
 	&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY . /opt/patrowl-hears/
+RUN mkdir backend_app
+COPY backend_app/requirements.txt /opt/patrowl-hears/backend_app/requirements.txt
 
 WORKDIR /opt/patrowl-hears/backend_app
 RUN rm -rf env \
@@ -31,6 +32,8 @@ RUN rm -rf env \
   && /opt/patrowl-hears/backend_app/env/bin/pip3 install -r /opt/patrowl-hears/backend_app/requirements.txt
 
 WORKDIR /opt/patrowl-hears/
+COPY . /opt/patrowl-hears/
+
 
 EXPOSE 8303
 ENTRYPOINT ["/opt/patrowl-hears/docker-entrypoint.sh"]
